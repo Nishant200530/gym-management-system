@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Success | Muscle Prime Gym</title>
+
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/store-order-success.css}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- ================= ORDER SUCCESS SECTION ================= -->
+<div class="order-success-container">
+
+    <h2 class="order-success-title">✔ Order Placed Successfully</h2>
+
+    <!-- ORDER DETAILS -->
+    <div class="order-card">
+        <h4>Order Details</h4>
+
+        <p><strong>Order ID:</strong> <span th:text="${order.id}"></span></p>
+        <p><strong>Order Date:</strong>
+            <span th:text="${#temporals.format(order.orderDate, 'dd MMM yyyy HH:mm')}"></span>
+        </p>
+        <p><strong>Payment Method:</strong>
+            <span th:text="${order.paymentMethod}"></span>
+        </p>
+        <p><strong>Total Amount:</strong>
+            ₹<span th:text="${order.totalAmount}"></span>
+        </p>
+    </div>
+
+    <!-- DELIVERY ADDRESS -->
+    <div class="order-card address-card">
+        <h4>Delivery Address</h4>
+
+        <p>
+            <strong th:text="${order.fullName}"></strong><br>
+            <span th:text="${order.mobile}"></span><br>
+            <span th:text="${order.address}"></span><br>
+            <span th:text="${order.city}"></span> -
+            <span th:text="${order.pincode}"></span>
+        </p>
+    </div>
+
+    <!-- ORDER ITEMS -->
+    <div class="order-card">
+        <h4>Ordered Items</h4>
+
+        <div th:each="item : ${order.items}" class="ordered-item">
+            <img th:src="${item.image}" alt="Product Image">
+
+            <div class="ordered-item-details">
+                <p><strong th:text="${item.productName}"></strong></p>
+                <p>₹<span th:text="${item.price}"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <a href="/store" class="continue-btn">Continue Shopping</a>
+
+</div>
+
+<!-- FOOTER -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

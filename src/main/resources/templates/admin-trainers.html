@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Trainers</title>
+
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="profile-container">
+
+    <div class="profile-header">
+        <h2>Manage Trainers</h2>
+    </div>
+
+    <!-- ADD TRAINER FORM -->
+    <form th:action="@{/admin/trainers/add}" method="post"
+          class="profile-details">
+
+        <input type="text" name="name" placeholder="Trainer Name" required>
+        <input type="text" name="specialization" placeholder="Specialization" required>
+
+        <!--  IMAGE URL -->
+        <input type="url"
+               name="image"
+               placeholder="Paste Trainer Image URL (https://...)"
+               required>
+
+        <button type="submit">Add Trainer</button>
+    </form>
+
+    <hr>
+
+    <!-- TRAINERS LIST -->
+    <div class="profile-details">
+        <div class="profile-card" th:each="t : ${trainers}">
+
+            <!-- IMAGE FIX -->
+            <div class="trainer-image-box">
+                <img th:src="${t.image != null ? t.image : '/images/user.png'}"
+                     alt="Trainer Image">
+            </div>
+
+            <h4 th:text="${t.name}"></h4>
+            <p th:text="${t.specialization}"></p>
+
+            <a th:href="@{/admin/trainers/delete/{id}(id=${t.id})}"
+               style="color:red">Delete</a>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Profile - Muscle Prime Gym</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- NAVBAR CSS -->
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+  <!-- PROFILE PAGE CSS -->
+  <link rel="stylesheet" th:href="@{/css/profile.css}">
+
+  <!-- FOOTER CSS -->
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- ================= EDIT PROFILE SECTION ================= -->
+<div class="profile-container">
+
+  <!-- HEADER -->
+  <div class="profile-header">
+    <div class="profile-info">
+      <h2>Edit Profile</h2>
+      <p>Update your personal details</p>
+    </div>
+  </div>
+
+  <!-- EDIT PROFILE FORM -->
+  <form action="/edit-profile" method="post">
+
+    <!-- NAME -->
+    <div class="profile-card">
+      <h4>Name</h4>
+      <input type="text"
+             name="name"
+             th:value="${user.name}"
+             required
+             style="width:100%; padding:12px; border-radius:8px; border:none;">
+    </div>
+
+    <!-- EMAIL (READ ONLY) -->
+    <div class="profile-card">
+      <h4>Email</h4>
+      <input type="email"
+             th:value="${user.email}"
+             disabled
+             style="width:100%; padding:12px; border-radius:8px; border:none; background:#222; color:#aaa;">
+    </div>
+
+    <!-- PHONE -->
+    <div class="profile-card">
+      <h4>Phone</h4>
+      <input type="text"
+             name="phone"
+             th:value="${user.phone}"
+             required
+             style="width:100%; padding:12px; border-radius:8px; border:none;">
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="profile-actions">
+      <button type="submit" class="edit-btn">
+        Save Changes
+      </button>
+
+      <button type="button"
+              class="logout-btn"
+              onclick="window.location.href='/profile'">
+        Cancel
+      </button>
+    </div>
+
+  </form>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

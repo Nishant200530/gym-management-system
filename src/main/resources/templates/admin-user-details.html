@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Details - Admin</title>
+
+    <!-- NAVBAR CSS -->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+    <!-- ADMIN USERS CSS -->
+    <link rel="stylesheet" th:href="@{/css/admin-users.css}">
+
+    <!-- FOOTER CSS -->
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<div class="page-bg">
+
+    <!-- NAVBAR -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <!-- CONTENT -->
+    <div class="admin-container">
+
+        <h2 class="admin-title">User Details</h2>
+
+        <div class="user-details-card">
+
+            <div class="detail-row">
+                <span>ID</span>
+                <span th:text="${user.id}"></span>
+            </div>
+
+            <div class="detail-row">
+                <span>Name</span>
+                <span th:text="${user.name}"></span>
+            </div>
+
+            <div class="detail-row">
+                <span>Email</span>
+                <span th:text="${user.email}"></span>
+            </div>
+
+            <div class="detail-row">
+                <span>Phone</span>
+                <span th:text="${user.phone}"></span>
+            </div>
+
+            <div class="detail-row">
+                <span>Role</span>
+                <span th:text="${user.role}"></span>
+            </div>
+
+            <div class="detail-row">
+                <span>Membership Plan</span>
+                <span th:text="${user.membershipPlan}"></span>
+            </div>
+
+            <div class="detail-row">
+                <span>Membership Price</span>
+                <span th:text="${user.membershipPrice}"></span>
+            </div>
+
+            <div class="detail-row">
+                <span>Joined At</span>
+                <span th:text="${user.joinedAt}"></span>
+            </div>
+
+            <div class="user-avatar" th:if="${user.avatar != null}">
+                <img th:src="@{'/uploads/' + ${user.avatar}}" alt="User Avatar">
+            </div>
+
+            <a th:href="@{/admin/users}" class="admin-back-link">
+                ⬅ Back to Users
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div th:replace="fragments/footer :: footer"></div>
+
+</div>
+
+</body>
+</html>

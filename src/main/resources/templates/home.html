@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muscle Prime Gym</title>
+
+  <!-- PAGE CSS -->
+  <link rel="stylesheet" th:href="@{/css/home.css}">
+
+  <!-- NAVBAR CSS -->
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+  <!-- FOOTER CSS -->
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <div th:replace="fragments/navbar :: navbar"></div>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>FEEL GOOD HERE</h1>
+      <p>MEMBERSHIPS STARTING AT 10,999 Rs / YEAR</p>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="about">
+    <h2>Welcome to Muscle Prime Gym</h2>
+    <p>
+      At Muscle Prime Gym, we focus on strength, endurance, and overall wellness.
+      With professional trainers, advanced equipment, and customized fitness plans,
+      we make sure you achieve your dream physique in the best way possible.
+    </p>
+  </section>
+
+  <!-- ================= FACILITIES ================= -->
+  <section class="facilities">
+    <h2>Our Facilities</h2>
+    <div class="facilities-container">
+
+      <div class="facility-box">
+        <h3>🏃 Cardio Training</h3>
+        <p>Top-notch machines for endurance, stamina & fat loss.</p>
+      </div>
+
+      <div class="facility-box">
+        <h3>💪 Strength Training</h3>
+        <p>Professional weights & advanced workout stations.</p>
+      </div>
+
+      <div class="facility-box">
+        <h3>👨‍🏫 Personal Coaching</h3>
+        <p>Expert trainers guiding you to achieve your goals.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= STORE PREVIEW ================= -->
+  <section class="store-preview">
+
+    <h2>Gym Store</h2>
+    <p class="store-subtitle">
+      Premium Supplements & Accessories to Fuel Your Fitness
+    </p>
+
+    <div class="store-cards">
+
+      <div class="store-card">
+        <img th:src="@{/images/WheyProtein.webp}" alt="Whey Protein">
+        <h3>Whey Protein</h3>
+        <p>High-quality protein for muscle growth</p>
+        <span>₹2,499</span>
+      </div>
+
+      <div class="store-card">
+        <img th:src="@{/images/GymGloves.jpg}" alt="Gym Gloves">
+        <h3>Gym Gloves</h3>
+        <p>Comfort & protection during heavy workouts</p>
+        <span>₹699</span>
+      </div>
+
+      <div class="store-card">
+       <img th:src="@{/images/ShakerBottle.jpg}" alt="Shaker Bottle">
+        <h3>Shaker Bottle</h3>
+        <p>Perfect mixing for your supplements</p>
+        <span>₹399</span>
+      </div>
+
+      <div class="store-card">
+        <img th:src="@{/images/ResistanceBand.jpg}" alt="Resistance Band">
+        <h3>Resistance Band</h3>
+        <p>Ideal for strength & rehab workouts</p>
+        <span>₹599</span>
+      </div>
+
+    </div>
+
+    <button class="store-btn"
+            th:onclick="|window.location.href='@{/store}'|">
+      Visit Gym Store
+    </button>
+
+  </section>
+
+  <!-- ================= TESTIMONIALS ================= -->
+  <section class="testimonials">
+    <h2>What Our Members Say</h2>
+    <p>"Best gym in town! Trainers are very professional."</p>
+    <p>"Amazing environment, helped me transform my fitness journey."</p>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="cta-section">
+    <h2>Ready to Transform?</h2>
+    <button th:onclick="|window.location.href='@{/register}'|">
+      Join Now
+    </button>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

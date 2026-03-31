@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Trainers - Muscle Prime Gym</title>
+
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+  <link rel="stylesheet" th:href="@{/css/trainers.css}">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<section class="trainer-section">
+  <h2>Meet Our Trainers</h2>
+
+  <div class="trainer-container">
+
+    <div class="trainer-card" th:each="t : ${trainers}">
+
+      <!--  FIXED IMAGE LOGIC -->
+      <div class="trainer-image">
+        <img th:src="${t.image != null ? t.image : '/images/user.png'}"
+             alt="Trainer">
+      </div>
+
+      <div class="trainer-card-body">
+        <h5 th:text="${t.name}"></h5>
+        <p th:text="${t.specialization}"></p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

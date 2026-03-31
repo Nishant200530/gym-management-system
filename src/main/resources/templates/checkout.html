@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout | Muscle Prime Gym</title>
+
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+  <link rel="stylesheet" th:href="@{/css/checkout.css}">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+
+<body class="checkout-page">
+
+<!-- ================= NAVBAR ================= -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- ================= CHECKOUT CONTENT ================= -->
+<div class="checkout-container">
+
+  <h2>Checkout</h2>
+
+  <div class="checkout-grid">
+
+    <!-- ================= LEFT : ADDRESS FORM ================= -->
+    <div class="checkout-form">
+
+      <form th:action="@{/checkout}" method="post" th:object="${checkout}">
+
+        <h3>Delivery Address</h3>
+
+        <input type="text" th:field="*{fullName}" placeholder="Full Name">
+        <small class="error"
+               th:if="${#fields.hasErrors('fullName')}"
+               th:errors="*{fullName}"></small>
+
+        <input type="text" th:field="*{mobile}" placeholder="Mobile Number">
+        <small class="error"
+               th:if="${#fields.hasErrors('mobile')}"
+               th:errors="*{mobile}"></small>
+
+        <input type="text" th:field="*{address}" placeholder="Address">
+        <small class="error"
+               th:if="${#fields.hasErrors('address')}"
+               th:errors="*{address}"></small>
+
+        <input type="text" th:field="*{city}" placeholder="City">
+        <small class="error"
+               th:if="${#fields.hasErrors('city')}"
+               th:errors="*{city}"></small>
+
+        <input type="text" th:field="*{pincode}" placeholder="Pincode">
+        <small class="error"
+               th:if="${#fields.hasErrors('pincode')}"
+               th:errors="*{pincode}"></small>
+
+        <button type="submit" class="checkout-btn">
+          Proceed to Payment
+        </button>
+
+      </form>
+    </div>
+
+    <!-- ================= RIGHT : ORDER SUMMARY ================= -->
+    <div class="checkout-summary">
+
+      <h3>Order Summary</h3>
+
+      <div th:each="item : ${cartItems}" class="summary-item">
+        
+        <span th:text="${item.productName}">Product</span>
+        <span>₹ <span th:text="${item.price}">0</span></span>
+      </div>
+
+      <div class="summary-item total">
+        <span>Total</span>
+        <span>₹ <span th:text="${totalAmount}">0</span></span>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

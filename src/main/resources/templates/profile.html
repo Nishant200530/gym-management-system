@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile - Muscle Prime Gym</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- NAVBAR CSS -->
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+  <!-- PROFILE PAGE CSS -->
+  <link rel="stylesheet" th:href="@{/css/profile.css}">
+
+  <!-- FOOTER CSS -->
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- ================= PROFILE SECTION ================= -->
+<div class="profile-container">
+
+  <!-- PROFILE HEADER -->
+  <div class="profile-header">
+
+    <img th:src="${user.avatar != null ? '/uploads/' + user.avatar : '/images/user.png'}"
+         alt="User Avatar"
+         class="profile-avatar">
+
+    <div class="profile-info">
+      <h2 th:text="${user.name}">User Name</h2>
+      <p>Member</p>
+    </div>
+  </div>
+
+  <!-- AVATAR UPLOAD -->
+  <form action="/upload-avatar"
+        method="post"
+        enctype="multipart/form-data"
+        class="avatar-form">
+
+    <label for="avatar">Choose Avatar</label>
+    <input type="file" id="avatar" name="avatar" accept="image/*" required>
+
+    <button type="submit" class="edit-btn">Upload Avatar</button>
+  </form>
+
+  <!-- PROFILE DETAILS -->
+  <div class="profile-details">
+
+    <div class="profile-card">
+      <h4>Email</h4>
+      <p th:text="${user.email}">email</p>
+    </div>
+
+    <div class="profile-card">
+      <h4>Phone</h4>
+      <p th:text="${user.phone}">phone</p>
+    </div>
+
+    
+    <div class="profile-card">
+      <h4>Membership Plan</h4>
+
+      <!-- USER HAS MEMBERSHIP -->
+      <div th:if="${user.membershipPlan != null}">
+        <p>
+          <strong th:text="${user.membershipPlan}">Premium</strong><br>
+          ₹<span th:text="${user.membershipPrice}">14999</span> / Year
+        </p>
+      </div>
+
+      <!-- USER DOES NOT HAVE MEMBERSHIP -->
+      <div th:if="${user.membershipPlan == null}">
+        <p>You don’t have an active membership</p>
+        <a th:href="@{/membership}" class="get-membership-btn">
+          Get Membership
+        </a>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <h4>Joined On</h4>
+      <p th:text="${#temporals.format(user.joinedAt, 'dd MMM yyyy, hh:mm a')}">
+        Joining Date
+      </p>
+    </div>
+
+  </div>
+
+  <!-- PROFILE ACTIONS -->
+  <div class="profile-actions">
+
+    <button class="edit-btn" onclick="window.location.href='/edit-profile'">
+      Edit Profile
+    </button>
+
+    <button class="logout-btn" onclick="window.location.href='/logout'">
+      Logout
+    </button>
+
+    <form action="/delete-account"
+          method="post"
+          onsubmit="return confirm('Are you sure you want to permanently delete your account?');"
+          style="display:inline-block;">
+
+      <button type="submit"
+              class="logout-btn"
+              style="background: linear-gradient(90deg, #b00000, #ff0000);">
+        Delete Account
+      </button>
+    </form>
+
+  </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

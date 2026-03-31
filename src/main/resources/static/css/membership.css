@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+
+body {
+  background: #111;
+  color: white;
+}
+
+/* ================= MEMBERSHIP SECTION ================= */
+.membership-section {
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("/images/Gymblurbg.jpg") center / cover no-repeat;
+
+  
+  padding: 30px 20px 60px;
+
+  text-align: center;
+}
+
+.membership-section h1 {
+  margin-bottom: 40px;
+  font-size: 36px;
+  color: #ffcc00;
+  text-decoration: underline;
+}
+
+/* ================= CARDS ================= */
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #1a1a1a;
+  width: 360px;
+  border-radius: 15px;
+  border: 2px solid #f39c12;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 24px;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f39c12;
+  margin-bottom: 20px;
+}
+
+/* ================= DESCRIPTION ================= */
+.plan-description {
+  text-align: center;
+  white-space: pre-line;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #eaeaea;
+  margin-bottom: 25px;
+}
+
+/* ================= SELECT PLAN BUTTON ================= */
+.select-btn {
+  margin-top: 20px;
+  padding: 12px 36px;
+  border-radius: 30px;
+  border: none;
+  background: #ffcc00;
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.select-btn:hover {
+  background: #ffb300;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 204, 0, 0.5);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .card {
+    width: 95%;
+    max-width: 380px;
+  }
+}

@@ -1,0 +1,112 @@
+/* ================= GLOBAL RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ================= BODY ================= */
+
+body {
+  background: transparent;
+  color: #333;
+}
+
+/* ================= HERO ================= */
+.hero {
+  background: url("https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg")
+    center / cover no-repeat;
+
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  position: relative;
+  color: white;
+}
+
+/* DARK OVERLAY */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  text-shadow: 2px 2px 4px black;
+}
+
+/* ================= ABOUT SECTION ================= */
+.about-section {
+  max-width: 1200px;
+
+  /* NEGATIVE MARGIN IS OK AND INTENTIONAL */
+  margin: -50px auto 50px;
+
+  padding: 60px 40px;
+  text-align: center;
+
+  background: linear-gradient(135deg, #1c1c1c, #2c2c2c);
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  color: #ddd;
+}
+
+.about-section h2 {
+  font-size: 2.8rem;
+  color: #ffcc00;
+  margin-bottom: 20px;
+}
+
+.about-section p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* ================= FEATURES ================= */
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.feature-card {
+  background: #111;
+  padding: 25px;
+  border-radius: 15px;
+  max-width: 250px;
+  text-align: center;
+
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.feature-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 0 20px #ffcc00;
+}
+
+.feature-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  margin-bottom: 15px;
+  border: 2px solid #ffcc00;
+}

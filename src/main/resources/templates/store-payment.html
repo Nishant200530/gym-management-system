@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Store Payment | Muscle Prime Gym</title>
+
+    <!-- GLOBAL CSS -->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+    <!-- STORE PAYMENT CSS -->
+    <link rel="stylesheet" th:href="@{/css/store-payment.css}">
+
+    <!-- Razorpay -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body class="store-payment-page">
+
+<!-- ================= NAVBAR ================= -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- ================= PAYMENT SECTION ================= -->
+<section class="store-payment-container">
+
+    <div class="store-payment-title">
+        Choose Payment Method
+    </div>
+
+    <div class="store-payment-options">
+
+        <!-- ================= CASH ON DELIVERY ================= -->
+        <div class="store-payment-card">
+            <img src="/images/cod.png" alt="COD">
+            <h5>Cash On Delivery</h5>
+
+            <form th:action="@{/store/place-order}" method="post">
+                <input type="hidden" name="paymentMethod" value="COD">
+                <button type="submit">Place Order</button>
+            </form>
+        </div>
+
+        <!-- ================= CARD PAYMENT ================= -->
+        <div class="store-payment-card active">
+            <img src="/images/card.png" alt="Card">
+            <h5>Credit / Debit Card</h5>
+            <button onclick="startRazorpayPayment()">Pay Securely</button>
+        </div>
+
+        
+
+    </div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- ================= RAZORPAY SCRIPT ================= -->
+<script>
+function startRazorpayPayment() {
+
+    fetch("/store/online/create-order", {
+        method: "POST"
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        var options = {
+            key: data.key,
+            amount: data.amount,
+            currency: "INR",
+            name: "Muscle Prime Gym",
+            description: "Store Purchase",
+            order_id: data.orderId,
+
+            handler: function (response) {
+
+                fetch("/store/online/verify", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(response)
+                })
+                .then(res => res.text())
+                .then(result => {
+
+                    if (!isNaN(result)) {
+                        window.location.href =
+                            "/store/order-success?orderId=" + result;
+                    } else {
+                        alert("Payment verification failed.");
+                    }
+                });
+            },
+
+            modal: {
+                ondismiss: function () {
+                    console.log("Payment popup closed");
+                }
+            }
+        };
+
+        var rzp = new Razorpay(options);
+        rzp.open();
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Unable to start payment. Try again.");
+    });
+}
+</script>
+
+</body>
+</html>

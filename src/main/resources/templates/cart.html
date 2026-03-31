@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart | Muscle Prime Gym</title>
+
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/cart.css}">
+</head>
+
+<body class="cart-page">
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="cart-container">
+  <h2>Your Cart</h2>
+
+  <div class="cart-layout">
+
+    <div class="cart-items">
+      <div th:if="${#lists.isEmpty(cartItems)}" class="empty-cart">
+        Your cart is empty 🛒
+      </div>
+
+      <div th:each="item, iter : ${cartItems}" class="cart-item">
+
+        <div class="cart-img">
+          <img th:src="${item.image}">
+        </div>
+
+        <div class="cart-details">
+          <div class="cart-name" th:text="${item.productName}"></div>
+
+          <!-- QUANTITY CONTROLS  -->
+          <form onsubmit="updateCart(event, this)" class="qty-form">
+            <input type="hidden" name="index" th:value="${iter.index}">
+
+            <div class="qty-box">
+              <button type="button" onclick="decreaseQty(this)">−</button>
+
+              <input type="number"
+                     name="quantity"
+                     th:value="${item.quantity}"
+                     min="1"
+                     readonly>
+
+              <button type="button" onclick="increaseQty(this)">+</button>
+            </div>
+
+            <button type="submit" class="update-btn">Update</button>
+          </form>
+        </div>
+
+        <div class="cart-price">
+          ₹ <span th:text="${item.price * item.quantity}"></span>
+
+          
+          <form onsubmit="removeItem(event, this)">
+            <input type="hidden" name="index" th:value="${iter.index}">
+            <button type="submit" class="delete-btn">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-summary">
+      <h3>Order Summary</h3>
+
+      <div class="summary-row">
+        <span>Total Items</span>
+        <span th:text="${#lists.size(cartItems)}"></span>
+      </div>
+
+      <div class="summary-row total">
+        <span>Total Amount</span>
+        ₹ <span th:text="${#aggregates.sum(cartItems.![price * quantity])}"></span>
+      </div>
+
+      <a th:href="@{/checkout}" class="order-btn">Place Order</a>
+      <a href="/store" class="continue-link">← Continue Shopping</a>
+    </div>
+
+  </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+
+<script>
+function increaseQty(btn) {
+  let input = btn.parentElement.querySelector("input");
+  input.value = parseInt(input.value) + 1;
+}
+
+function decreaseQty(btn) {
+  let input = btn.parentElement.querySelector("input");
+  if (parseInt(input.value) > 1) {
+    input.value = parseInt(input.value) - 1;
+  }
+}
+
+
+function updateCart(event, form) {
+  event.preventDefault(); 
+
+  let formData = new FormData(form);
+
+  fetch("/cart/update", {
+    method: "POST",
+    body: formData
+  }).then(() => {
+    
+    location.reload();
+  });
+}
+
+
+function removeItem(event, form) {
+  event.preventDefault();
+
+  let formData = new FormData(form);
+
+  fetch("/cart/remove", {
+    method: "POST",
+    body: formData
+  }).then(() => {
+    location.reload();
+  });
+}
+</script>
+
+</body>
+</html>

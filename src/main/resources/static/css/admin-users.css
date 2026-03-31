@@ -1,0 +1,166 @@
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= PAGE BACKGROUND (SAFE) ================= */
+.page-bg {
+  min-height: 100vh;
+  color: white;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)),
+    url("/images/profile-bg.jpg") center / cover no-repeat fixed;
+  position: relative;
+}
+
+.page-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: inherit;
+  filter: blur(10px);
+  transform: scale(1.05);
+  z-index: -1;
+}
+
+/* ================= ADMIN CONTAINER ================= */
+.admin-container {
+  max-width: 1100px;
+  margin: 100px auto 160px;
+  padding: 40px;
+  background: rgba(15, 15, 15, 0.9);
+  border-radius: 22px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+
+.admin-title {
+  text-align: center;
+  color: #ffcc00;
+  margin-bottom: 30px;
+  font-size: 26px;
+}
+
+/* ================= TABLE ================= */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #0f0f0f;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.admin-table th {
+  background: #111;
+  color: #ffcc00;
+  padding: 14px;
+  font-size: 14px;
+}
+
+.admin-table td {
+  padding: 14px;
+  font-size: 14px;
+  color: #eee;
+  border-top: 1px solid #222;
+}
+
+.admin-table tr:hover {
+  background: rgba(255, 204, 0, 0.06);
+}
+
+/* ================= BUTTONS ================= */
+.btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 0 4px;
+}
+
+.btn-view {
+  border: 2px solid #ffcc00;
+  color: #ffcc00;
+  background: transparent;
+}
+
+.btn-view:hover {
+  background: #ffcc00;
+  color: #000;
+}
+
+.btn-delete {
+  background: linear-gradient(90deg, #ff3300, #ff6600);
+  color: #fff;
+}
+
+.btn-delete:hover {
+  transform: scale(1.05);
+}
+
+/* ================= USER DETAILS CARD ================= */
+.user-details-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #0f0f0f;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #333;
+  color: #eee;
+}
+
+.detail-row span:first-child {
+  color: #ccc;
+}
+
+/* ================= USER AVATAR ================= */
+.user-avatar {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.user-avatar img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid #ffcc00;
+}
+
+/* ================= BACK LINK ================= */
+.admin-back-link {
+  display: block;
+  margin-top: 30px;
+  text-align: center;
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.admin-back-link:hover {
+  text-decoration: underline;
+}
+
+/* ================= UTIL ================= */
+.inline-form {
+  display: inline;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 25px;
+  }
+}

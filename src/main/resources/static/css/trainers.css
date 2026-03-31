@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: white;
+
+  background: url("/images/Trainerbg.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* ================= TRAINER SECTION ================= */
+.trainer-section {
+  
+  padding: 30px 20px 60px;
+
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.trainer-section h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #ffc107;
+}
+
+/* ================= TRAINER CONTAINER ================= */
+.trainer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.trainer-card {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.trainer-card:hover {
+  transform: scale(1.05);
+}
+
+.trainer-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.trainer-card-body {
+  padding: 20px;
+}
+
+.trainer-card-body h5 {
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: 20px;
+}
+
+.trainer-card-body p {
+  margin: 0;
+  color: #ccc;
+  font-size: 14px;
+}
+.trainer-image {
+  background: #ffffff;
+  height: 180px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px 16px 0 0;
+}
+
+.trainer-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}

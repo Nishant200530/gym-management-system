@@ -1,0 +1,34 @@
+<nav class="navbar"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+     th:fragment="navbar">
+
+  <div class="logo">Muscle Prime Gym</div>
+
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/about}">About</a></li>
+      <li><a th:href="@{/trainers}">Trainers</a></li>
+      <li><a th:href="@{/membership}">Membership</a></li>
+      <li><a th:href="@{/contact}">Contact Us</a></li>
+      <li><a th:href="@{/store}">Store</a></li>
+    </ul>
+
+    <!-- ADMIN -->
+    <div class="profile" sec:authorize="hasRole('ADMIN')">
+      <a th:href="@{/admin/dashboard}">Admin Profile</a>
+    </div>
+
+    <!-- USER -->
+    <div class="profile" sec:authorize="hasRole('USER')">
+      <a th:href="@{/profile}">👤 Profile</a>
+    </div>
+
+    <!-- LOGIN (ONLY WHEN NOT LOGGED IN) -->
+    <div class="profile" sec:authorize="isAnonymous()">
+      <a th:href="@{/login}">Login</a>
+    </div>
+
+  </div>
+</nav>

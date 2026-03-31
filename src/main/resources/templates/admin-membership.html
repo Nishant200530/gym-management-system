@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Membership - Muscle Prime Gym</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- NAVBAR CSS -->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+    <!-- ADMIN MEMBERSHIP CSS -->
+    <link rel="stylesheet" th:href="@{/css/admin-membership.css}">
+
+    <!-- FOOTER CSS -->
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- ================= PAGE TITLE ================= -->
+<h2 class="page-title">Manage Membership Plans</h2>
+
+<!-- ================= FORM ================= -->
+<form th:action="@{/admin/membership/save}"
+      th:object="${membership}"
+      method="post"
+      class="admin-form">
+
+    <input type="hidden" th:field="*{id}">
+
+    <input type="text" th:field="*{planName}" placeholder="Plan Name" required>
+    <input type="number" th:field="*{price}" placeholder="Price" required>
+    <input type="text" th:field="*{image}" placeholder="Image Path (/images/xxx.jpg)">
+    <textarea th:field="*{description}" placeholder="Description"></textarea>
+
+    <button type="submit">Save Plan</button>
+</form>
+
+<!-- ================= TABLE ================= -->
+<table class="admin-table">
+    <tr>
+        <th>Plan</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="m : ${memberships}">
+        <td th:text="${m.planName}"></td>
+        <td>₹ <span th:text="${m.price}"></span></td>
+        <td>
+            <a th:href="@{/admin/membership/edit/{id}(id=${m.id})}"
+               class="action-btn edit-btn">Edit</a>
+
+            <a th:href="@{/admin/membership/delete/{id}(id=${m.id})}"
+               class="action-btn delete-btn"
+               onclick="return confirm('Delete this plan?')">Delete</a>
+        </td>
+    </tr>
+</table>
+
+<!-- ================= BACK TO DASHBOARD ================= -->
+<div class="admin-back-wrapper">
+    <a th:href="@{/admin/dashboard}" class="admin-back-link">
+        ⬅ Back to Dashboard
+    </a>
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

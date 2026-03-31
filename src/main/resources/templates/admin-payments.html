@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Records - Admin</title>
+
+    <!-- NAVBAR CSS -->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+    <!-- ADMIN USERS / PAYMENTS CSS -->
+    <link rel="stylesheet" th:href="@{/css/admin-users.css}">
+
+    <!-- FOOTER CSS -->
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- ================= ADMIN PAYMENTS ================= -->
+<div class="admin-container">
+
+    <h2 class="admin-title">Payment Records</h2>
+
+    <div class="table-wrapper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Transaction ID</th>
+                    <th>User</th>
+                    <th>Plan</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Paid At</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="p : ${payments}">
+                    <td th:text="${p.orderId}"></td>
+                    <td th:text="${p.transactionId}"></td>
+                    <td th:text="${p.user.email}"></td>
+                    <td th:text="${p.planName}"></td>
+                    <td>₹ <span th:text="${p.amount}"></span></td>
+                    <td th:text="${p.status}"></td>
+                    <td th:text="${p.paidAt}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- BACK TO DASHBOARD -->
+    <a th:href="@{/admin/dashboard}" class="admin-back-link">
+        ⬅ Back to Dashboard
+    </a>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

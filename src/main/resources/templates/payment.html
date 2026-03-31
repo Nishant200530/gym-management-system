@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Secure Payment | Muscle Prime Gym</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- NAVBAR CSS -->
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+  <!-- PAYMENT CSS -->
+  <link rel="stylesheet" th:href="@{/css/payment.css}">
+
+  <!-- FOOTER CSS -->
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+  <!-- Razorpay -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- ================= PAYMENT PAGE ================= -->
+<div class="payment-page">
+  <div class="payment-container">
+
+    <h2>secure payment</h2>
+
+    <div class="payment-details">
+      <p>plan: <span id="plan" th:text="${plan}"></span></p>
+      <p>amount: ₹<span id="amount" th:text="${price}"></span></p>
+    </div>
+
+    <button class="pay-btn" onclick="startMembershipPayment()">
+      pay now
+    </button>
+
+    <a th:href="@{/membership}" class="cancel-link">
+      cancel & go back
+    </a>
+
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- ================= RAZORPAY SCRIPT ================= -->
+<script>
+function startMembershipPayment() {
+
+  let plan = document.getElementById("plan").innerText;
+  let amount = document.getElementById("amount").innerText;
+
+  fetch("/membership/online/create-order?amount=" + amount, {
+    method: "POST"
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    var options = {
+      key: data.key,
+      amount: data.amount,
+      currency: "INR",
+      name: "Muscle Prime Gym",
+      description: "Membership Payment",
+      order_id: data.orderId,
+
+      handler: function (response) {
+
+        response.plan = plan;
+        response.amount = amount;
+
+        fetch("/membership/online/verify", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(response)
+        })
+        .then(res => res.text())
+        .then(result => {
+          if (result === "SUCCESS") {
+            window.location.href = "/profile";
+          } else {
+            alert("Payment failed");
+          }
+        });
+      }
+    };
+
+    var rzp = new Razorpay(options);
+    rzp.open();
+  });
+}
+</script>
+
+</body>
+</html>

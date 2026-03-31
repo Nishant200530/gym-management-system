@@ -1,0 +1,177 @@
+/* ================= GLOBAL RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+/* ================= BASE  ================= */
+body {
+    background: #111;          
+    color: #eee;
+}
+
+/* ================= ADMIN PAGE WRAPPER ================= */
+.admin-page {
+    background: linear-gradient(120deg, #0f0f0f, #1c1c1c);
+    min-height: calc(100vh - 160px); /* navbar + footer space */
+    padding: 40px 20px 80px;
+}
+
+/* ================= PAGE TITLE ================= */
+.page-title {
+    text-align: center;
+    font-size: 34px;
+    color: #ffcc00;
+    margin: 30px 0 40px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ================= FORM ================= */
+.admin-form {
+    max-width: 900px;
+    margin: auto;
+    background: #111;
+    padding: 25px;
+    border-radius: 16px;
+    border: 2px solid #ffcc00;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.admin-form input,
+.admin-form textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ffcc00;
+    background: #000;
+    color: #fff;
+    font-size: 14px;
+}
+
+.admin-form input::placeholder,
+.admin-form textarea::placeholder {
+    color: #aaa;
+}
+
+.admin-form textarea {
+    grid-column: span 4;
+    height: 100px;
+    resize: none;
+}
+
+/* ================= SAVE BUTTON ================= */
+.admin-form button {
+    grid-column: span 4;
+    padding: 14px;
+    background: #ffcc00;
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.admin-form button:hover {
+    background: #ffb300;
+    transform: translateY(-2px);
+}
+
+/* ================= TABLE ================= */
+.admin-table {
+    width: 92%;
+    margin: 60px auto 0;
+    border-collapse: collapse;
+    background: #111;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.admin-table th {
+    background: #ffcc00;
+    color: #000;
+    font-size: 15px;
+}
+
+.admin-table tr:hover {
+    background: #1f1f1f;
+}
+
+/* ================= ACTION BUTTONS ================= */
+.action-btn {
+    padding: 7px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 5px;
+    display: inline-block;
+}
+
+.edit-btn {
+    background: #00bcd4;
+    color: #000;
+}
+
+.edit-btn:hover {
+    background: #00a5bb;
+}
+
+.delete-btn {
+    background: #ff4d4d;
+    color: #000;
+}
+
+.delete-btn:hover {
+    background: #e63c3c;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .admin-form {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-form textarea,
+    .admin-form button {
+        grid-column: span 1;
+    }
+
+    .admin-table {
+        width: 100%;
+    }
+}
+
+/* ================= BACK TO DASHBOARD LINK ================= */
+
+.admin-back-wrapper {
+    margin: 60px 0 20px;
+    text-align: center;
+}
+
+.admin-back-link {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.admin-back-link:hover {
+    text-decoration: underline;
+    color: #ffb300;
+}
+

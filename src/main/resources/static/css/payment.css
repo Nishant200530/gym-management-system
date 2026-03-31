@@ -1,0 +1,136 @@
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= PAGE BACKGROUND ================= */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+  color: white;
+
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("/images/Paymentbg.jpg") center / cover no-repeat;
+}
+
+/* ================= PAGE WRAPPER ================= */
+.payment-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /*  FIXED: reduced padding */
+  padding: 30px 20px;
+}
+
+/* ================= PAYMENT CONTAINER ================= */
+.payment-container {
+  width: 100%;
+  max-width: 480px;
+  padding: 45px 35px;
+
+  background: linear-gradient(145deg, #0e0e0e, #1a1a1a);
+  border-radius: 22px;
+  text-align: center;
+
+  border: 1px solid rgba(255, 204, 0, 0.3);
+  box-shadow:
+    0 0 25px rgba(255, 204, 0, 0.25),
+    inset 0 0 15px rgba(0,0,0,0.6);
+
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* ================= TITLE ================= */
+.payment-container h2 {
+  font-size: 30px;
+  text-transform: uppercase;
+  color: #ffcc00;
+  margin-bottom: 30px;
+  letter-spacing: 1.5px;
+}
+
+/* ================= PLAN DETAILS ================= */
+.payment-details {
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px dashed #ffcc00;
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 30px;
+}
+
+.payment-details p {
+  font-size: 17px;
+  margin: 12px 0;
+  color: #e0e0e0;
+  text-transform: capitalize;
+}
+
+.payment-details span {
+  color: #ffcc00;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* ================= PAY BUTTON ================= */
+.pay-btn {
+  width: 100%;
+  padding: 15px;
+  font-size: 17px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  color: #000;
+  background: linear-gradient(90deg, #ffcc00, #ff9900);
+  border: none;
+  border-radius: 35px;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pay-btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  background: linear-gradient(90deg, #ff9900, #ffcc00);
+  box-shadow: 0 0 25px rgba(255, 204, 0, 0.7);
+}
+
+/* ================= CANCEL LINK ================= */
+.cancel-link {
+  display: inline-block;
+  margin-top: 22px;
+  color: #aaa;
+  font-size: 14px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.cancel-link:hover {
+  color: #ffcc00;
+  text-decoration: underline;
+}
+
+/* ================= FADE ANIMATION ================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 600px) {
+  .payment-container {
+    margin: 0 15px;
+    padding: 35px 25px;
+  }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Queries - Admin</title>
+
+    <!-- NAVBAR CSS -->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+    <!-- ADMIN USERS CSS (REUSED) -->
+    <link rel="stylesheet" th:href="@{/css/admin-users.css}">
+
+    <!-- FOOTER CSS -->
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<div class="page-bg">
+
+    <!-- NAVBAR -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <!-- CONTENT -->
+    <div class="admin-container">
+
+        <h2 class="admin-title">
+            User Queries
+        </h2>
+
+        <div class="table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Sent At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="q : ${queries}">
+                        <td th:text="${q.name}"></td>
+                        <td th:text="${q.email}"></td>
+                        <td th:text="${q.message}"></td>
+                        <td th:text="${#temporals.format(q.sentAt,'dd MMM yyyy hh:mm a')}"></td>
+
+                        <!-- DELETE BUTTON -->
+                        <td>
+                            <form th:action="@{/admin/delete-query/{id}(id=${q.id})}"
+                                  method="post"
+                                  class="inline-form"
+                                  onsubmit="return confirm('Delete this query?');">
+
+                                <button type="submit" class="btn btn-delete">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <a th:href="@{/admin/dashboard}" class="admin-back-link">
+            ⬅ Back to Dashboard
+        </a>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div th:replace="fragments/footer :: footer"></div>
+
+</div>
+
+</body>
+</html>

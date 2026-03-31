@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Reset Password - Muscle Prime Gym</title>
+
+  <!-- NAVBAR CSS -->
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+  <!-- PAGE CSS -->
+  <link rel="stylesheet" th:href="@{/css/login.css}">
+
+  <!-- FOOTER CSS -->
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- FORM BOX -->
+<div class="login-box">
+  <h2>Verify OTP & Reset Password</h2>
+
+  <form th:action="@{/reset-password}" method="post">
+
+    <input type="hidden" name="email" th:value="${email}">
+
+    <!-- OTP INPUT -->
+    <input type="text"
+           name="otp"
+           class="otp-input"
+           placeholder="Enter 6-digit OTP"
+           maxlength="6"
+           inputmode="numeric"
+           pattern="[0-9]{6}"
+           required>
+
+    <input type="password"
+           name="password"
+           placeholder="Enter new password"
+           required>
+
+    <button type="submit">Reset Password</button>
+  </form>
+
+  <p class="error" th:text="${error}"></p>
+
+  <p>
+    <a th:href="@{/login}">Back to Login</a>
+  </p>
+</div>
+
+<!-- FOOTER -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

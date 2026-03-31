@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact - Muscle Prime Gym</title>
+
+  <!-- NAVBAR CSS -->
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+  <!-- PAGE CSS -->
+  <link rel="stylesheet" th:href="@{/css/contact.css}">
+
+  <!-- FOOTER CSS -->
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<!-- EXTERNAL NAVBAR -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- CONTACT BOX -->
+<div class="contact-box">
+  <h2>Contact Us</h2>
+
+  <form th:action="@{/contact}" method="post">
+    <input type="text" name="name" placeholder="Enter Your Name" required>
+    <input type="email" name="email" placeholder="Enter Your Email" required>
+    <input type="text" name="message" placeholder="Enter Your Message" required>
+
+    <button type="submit">Send Message</button>
+  </form>
+</div>
+
+<!-- FOOTER -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

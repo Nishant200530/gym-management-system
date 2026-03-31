@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Muscle Prime Gym</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- NAVBAR CSS -->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+    <!-- ADMIN / PROFILE CSS -->
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+
+    <!-- FOOTER CSS -->
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- ================= ADMIN DASHBOARD ================= -->
+<div class="profile-container">
+
+    <!-- HEADER -->
+    <div class="profile-header">
+
+        <!--   ADMIN AVATAR -->
+        <img th:src="${session.loggedUser.avatar != null 
+                      ? '/uploads/' + session.loggedUser.avatar 
+                      : '/images/admin.png'}"
+             alt="Admin Avatar"
+             class="profile-avatar">
+
+        <div class="profile-info">
+            <h2>Admin Dashboard</h2>
+            <p>Manage Muscle Prime Gym</p>
+        </div>
+    </div>
+
+    <!--  AVATAR UPLOAD  -->
+    <form action="/upload-avatar"
+          method="post"
+          enctype="multipart/form-data"
+          class="avatar-form">
+
+        <label for="avatar">Choose Avatar</label>
+        <input type="file" id="avatar" name="avatar" accept="image/*" required>
+
+        <button type="submit" class="edit-btn">
+            Upload Avatar
+        </button>
+    </form>
+
+    <!-- ================= ADMIN CARDS ================= -->
+    <div class="profile-details">
+
+        <div class="profile-card" onclick="window.location.href='/admin/users'">
+            <h4>Total Users</h4>
+            <p>View and manage registered gym members</p>
+        </div>
+
+        <div class="profile-card" onclick="window.location.href='/admin/membership'">
+            <h4>Membership Plans</h4>
+            <p>Create, update and delete membership plans</p>
+        </div>
+
+        <div class="profile-card" onclick="window.location.href='/admin/trainers'">
+            <h4>Trainers</h4>
+            <p>Add and manage gym trainers</p>
+        </div>
+
+        <div class="profile-card" onclick="window.location.href='/admin/payments'">
+            <h4>Payments</h4>
+            <p>Track membership payments and revenue</p>
+        </div>
+
+        <div class="profile-card" onclick="window.location.href='/admin/queries'">
+            <h4>User Queries</h4>
+            <p>Handle contact & support requests</p>
+        </div>
+
+        <div class="profile-card" onclick="window.location.href='/admin/products'">
+            <h4>Products</h4>
+            <p>Manage gym products</p>
+        </div>
+
+    </div>
+
+    <!-- ================= LOGOUT ================= -->
+    <div class="profile-actions">
+        <form th:action="@{/logout}" method="get">
+            <button class="logout-btn">Logout</button>
+        </form>
+    </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

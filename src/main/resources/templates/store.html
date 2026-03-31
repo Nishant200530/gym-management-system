@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gym Store | Muscle Prime</title>
+
+  <link rel="stylesheet" th:href="@{/css/store.css}">
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+
+<body class="store-page">
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- HEADER -->
+<section class="store-header">
+  <h1>GYM STORE</h1>
+  <p>Premium Supplements, Gym Wears & Accessories</p>
+</section>
+
+<!-- TOOLBAR -->
+<div class="store-toolbar">
+
+  <select id="categoryFilter" class="store-select">
+    <option value="all">All Categories</option>
+    <option value="supplements">Supplements</option>
+    <option value="gym-clothing">Gym Clothing</option>
+    <option value="accessories">Accessories</option>
+    <option value="equipment">Equipment</option>
+  </select>
+
+  <select id="sortFilter" class="store-select">
+    <option value="">Sort By</option>
+    <option value="priceLow">Price: Low → High</option>
+    <option value="priceHigh">Price: High → Low</option>
+    <option value="name">Name A → Z</option>
+  </select>
+
+  <input type="text"
+         id="searchInput"
+         class="store-search"
+         placeholder="Search products...">
+
+  <a href="/cart" class="cart-btn">🛒 Cart</a>
+</div>
+
+<!-- PRODUCTS -->
+<section class="store-products">
+  <div class="store-product-grid" id="productGrid">
+
+    <div class="store-product-card"
+         th:each="p : ${products}"
+         th:attr="data-name=${p.name},
+                  data-price=${p.price},
+                  data-category=${p.category}">
+
+      <div class="product-image">
+        <img th:src="${p.image}">
+      </div>
+
+      <div class="product-info">
+        <h3 th:text="${p.name}"></h3>
+        <p th:text="${p.description}"></p>
+
+        <div class="price">₹ <span th:text="${p.price}"></span></div>
+
+        <!-- QUANTITY -->
+        <div class="quantity-box">
+          <button type="button" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1" th:attr="max=${p.quantity}">
+          <button type="button" onclick="changeQty(this,1)">+</button>
+        </div>
+
+        <!-- ACTIONS  -->
+        <div class="action-row">
+
+          <!-- ADD TO CART -->
+          <form onsubmit="addToCart(event, this)">
+            <input type="hidden" name="productId" th:value="${p.id}">
+            <input type="hidden" name="quantity" class="qty-hidden" value="1">
+            <button type="submit" th:disabled="${p.quantity == 0}">
+              Add to Cart
+            </button>
+          </form>
+
+          <!-- BUY NOW -->
+          <form onsubmit="buyNow(event, this)">
+            <input type="hidden" name="productId" th:value="${p.id}">
+            <input type="hidden" name="quantity" class="qty-hidden" value="1">
+            <button type="submit" th:disabled="${p.quantity == 0}">
+              Buy Now
+            </button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+function changeQty(btn, delta) {
+  const box = btn.parentElement;
+  const input = box.querySelector("input");
+  const max = parseInt(input.max) || 1;
+  let val = parseInt(input.value) + delta;
+  if (val < 1) val = 1;
+  if (val > max) val = max;
+  input.value = val;
+
+  btn.closest(".product-info")
+     .querySelectorAll(".qty-hidden")
+     .forEach(h => h.value = val);
+}
+
+/* ADD TO CART  */
+function addToCart(event, form) {
+  event.preventDefault(); 
+
+  let data = new FormData(form);
+
+  fetch("/add-to-cart", {
+    method: "POST",
+    body: data
+  }).then(() => {
+    alert("Added to cart 🛒");
+  });
+}
+
+/* BUY NOW  */
+function buyNow(event, form) {
+  event.preventDefault();
+
+  let data = new FormData(form);
+
+  fetch("/buy-now-checkout", {
+    method: "POST",
+    body: data
+  }).then(() => {
+    window.location.href = "/checkout";
+  });
+}
+
+/* FILTER + SEARCH + SORT */
+const categoryFilter = document.getElementById("categoryFilter");
+const searchInput = document.getElementById("searchInput");
+const sortFilter = document.getElementById("sortFilter");
+const grid = document.getElementById("productGrid");
+
+function applyFilters() {
+  const cards = Array.from(grid.children);
+  const category = categoryFilter.value;
+  const search = searchInput.value.toLowerCase();
+
+  cards.forEach(card => {
+    const name = card.dataset.name.toLowerCase();
+    const cat = card.dataset.category;
+
+    let visible = true;
+    if (category !== "all" && cat !== category) visible = false;
+    if (!name.includes(search)) visible = false;
+
+    card.style.display = visible ? "block" : "none";
+  });
+}
+
+function applySort() {
+  const cards = Array.from(grid.children);
+
+  let sorted = cards.sort((a, b) => {
+    if (sortFilter.value === "priceLow")
+      return a.dataset.price - b.dataset.price;
+    if (sortFilter.value === "priceHigh")
+      return b.dataset.price - a.dataset.price;
+    if (sortFilter.value === "name")
+      return a.dataset.name.localeCompare(b.dataset.name);
+    return 0;
+  });
+
+  sorted.forEach(card => grid.appendChild(card));
+}
+
+categoryFilter.onchange = applyFilters;
+searchInput.onkeyup = applyFilters;
+sortFilter.onchange = applySort;
+</script>
+
+</body>
+</html>

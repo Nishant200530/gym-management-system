@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<footer th:fragment="footer">
+  <div class="footer-container">
+
+    <!-- LEFT -->
+    <div class="footer-left">
+      <h3>MusclePrime Gym</h3>
+      <p>Train Hard. Stay Strong. Be Fit.</p>
+    </div>
+
+    <!-- CENTER -->
+    <div class="footer-center">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/about}">About</a></li>
+        <li><a th:href="@{/membership}">Membership</a></li>
+        <li><a th:href="@{/trainers}">Trainers</a></li>
+        <li><a th:href="@{/contact}">Contact Us</a></li>
+		<li><a th:href="@{/store}">Store</a></li>
+      </ul>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="footer-right">
+      <h4>Contact Info</h4>
+      <p><strong>Email:</strong> info@muscleprimegym.com</p>
+      <p><strong>Phone:</strong> +91 98765 43210</p>
+    </div>
+
+    <!-- ADDRESS -->
+    <div class="footer-address">
+      <h4>Address</h4>
+      <p>
+        Survey No 3/2/A Road, Kalyan (West)<br>
+        Opp. Sangam Complex,<br>
+        Near Chattri Bunglow,<br>
+        Chikan Ghar, Kalyan<br>
+        Maharashtra 421301, India
+      </p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 MusclePrime Gym. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

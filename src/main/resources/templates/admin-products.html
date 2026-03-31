@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Products | Muscle Prime Gym</title>
+
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+  <link rel="stylesheet" th:href="@{/css/admin-products.css}">
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body class="admin-page">
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<main class="admin-container">
+
+  <h2 class="admin-title">Manage All Products</h2>
+
+  <!-- ADD / EDIT PRODUCT FORM -->
+  <section class="admin-card">
+    <form class="admin-form"
+          th:action="${product.id == null ? '/admin/products/add' : '/admin/products/update'}"
+          th:object="${product}"
+          method="post">
+
+      <input type="hidden" th:field="*{id}">
+
+      <input type="text"
+             th:field="*{name}"
+             placeholder="Product Name"
+             required>
+
+      <input type="text"
+             th:field="*{description}"
+             placeholder="Description"
+             required>
+
+      <!-- PRICE -->
+      <input type="number"
+             name="price"
+             th:value="${product.id == null ? '' : product.price}"
+             placeholder="Price (₹)"
+             step="0.01"
+             min="0"
+             required>
+
+      <!-- STOCK -->
+      <input type="number"
+             name="quantity"
+             th:value="${product.id == null ? '' : product.quantity}"
+             placeholder="Available Stock"
+             min="0"
+             required>
+
+      <!--  CATEGORY (DROPDOWN – STANDARD VALUES) -->
+      <select name="category" required>
+        <option value="">Select Category</option>
+
+        <option value="supplements"
+          th:selected="${product.category == 'supplements'}">
+          Supplements
+        </option>
+
+        <option value="gym-clothing"
+          th:selected="${product.category == 'gym-clothing'}">
+          Gym Clothing
+        </option>
+
+        <option value="accessories"
+          th:selected="${product.category == 'accessories'}">
+          Accessories
+        </option>
+
+        <option value="equipment"
+          th:selected="${product.category == 'equipment'}">
+          Equipment
+        </option>
+      </select>
+
+      <input type="url"
+             th:field="*{image}"
+             placeholder="Paste Image URL (https://...)"
+             required>
+
+      <button type="submit"
+              th:text="${product.id == null ? 'Add Product' : 'Update Product'}">
+      </button>
+    </form>
+  </section>
+
+  <!-- PRODUCT CARDS -->
+  <section class="admin-product-grid">
+
+    <div class="admin-product-card" th:each="p : ${products}">
+
+      <div class="product-image-box">
+        <img th:src="${p.image != null ? p.image : '/images/no-image.png'}"
+             alt="Product Image">
+      </div>
+
+      <div class="card-content">
+        <h4 th:text="${p.name}"></h4>
+        <p class="price">₹ <span th:text="${p.price}"></span></p>
+        <p>Stock: <span th:text="${p.quantity}"></span></p>
+
+        <div class="card-actions">
+          <a th:href="@{'/admin/products/edit/' + ${p.id}}" class="edit-btn">
+            Edit
+          </a>
+          <a th:href="@{'/admin/products/delete/' + ${p.id}}" class="delete-btn">
+            Delete
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

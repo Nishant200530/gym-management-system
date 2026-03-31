@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us - Muscle Prime Gym</title>
+
+  <!-- NAVBAR CSS -->
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+  <!-- PAGE CSS -->
+  <link rel="stylesheet" th:href="@{/css/about.css}">
+
+  <!-- FOOTER CSS -->
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+  <!-- EXTERNAL NAVBAR -->
+  <div th:replace="fragments/navbar :: navbar"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>About Muscle Prime Gym</h1>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-section">
+    <h2>Our Story</h2>
+
+    <p>
+      Muscle Prime Gym is dedicated to helping everyone achieve their fitness goals.
+      With expert trainers, modern equipment, and a motivating environment,
+      we provide personalized plans for all fitness levels.
+    </p>
+
+    <p>
+      Fitness is more than strength – it’s about confidence, discipline, and lifestyle.
+      Join our community and transform your body and mind today.
+    </p>
+
+    <!-- FEATURES -->
+    <div class="features">
+
+      <div class="feature-card">
+        <img th:src="@{/images/expert trainers.jpeg}" alt="Expert Trainers">
+        <h3>Expert Trainers</h3>
+        <p>Certified trainers guide you to reach your fitness goals effectively.</p>
+      </div>
+
+      <div class="feature-card">
+        <img th:src="@{/images/modern equipment.jpeg}" alt="Modern Equipment">
+        <h3>Modern Equipment</h3>
+        <p>We provide the latest machines and tools for a complete workout experience.</p>
+      </div>
+
+      <div class="feature-card">
+        <img th:src="@{/images/nutrition guidance.jpeg}" alt="Nutrition Guidance">
+        <h3>Nutrition Guidance</h3>
+        <p>Customized diet plans to complement your workouts and achieve results faster.</p>
+      </div>
+
+      <div class="feature-card">
+        <img th:src="@{/images/community support.jpeg}" alt="Community Support">
+        <h3>Community Support</h3>
+        <p>Train in a motivating and friendly environment with like-minded people.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

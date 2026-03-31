@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+
+  background-image: url("https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ================= REGISTER BOX ================= */
+.register-box {
+  background: rgba(0,0,0,0.7);
+  padding: 40px 30px;
+  width: 350px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+
+  /* 🔥 FIXED: reduced top margin */
+  margin: 40px auto;
+
+  text-align: center;
+  color: white;
+  backdrop-filter: blur(5px);
+}
+
+.register-box h2 {
+  margin-bottom: 25px;
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+.register-box input[type="text"],
+.register-box input[type="email"],
+.register-box input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  background-color: rgba(255,255,255,0.1);
+  color: white;
+}
+
+input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid #ffcc00;
+  background-color: rgba(255,255,255,0.2);
+}
+
+.register-box button {
+  background: linear-gradient(90deg,#ff6600,#ff3300);
+  color: white;
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+.register-box button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg,#ff3300,#ff6600);
+}
+
+.register-box p a {
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-box p a:hover {
+  text-decoration: underline;
+}
+/* ================= VALIDATION ERROR ================= */
+.error {
+    display: block;
+    color: #ff3b3b !important;   
+    font-size: 13px;
+    margin: 6px 0 12px;
+    font-weight: 600;
+    text-align: left;
+}

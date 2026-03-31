@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Muscle Prime Gym</title>
+
+    <!-- NAVBAR CSS -->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+    <!-- PAGE CSS -->
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+
+    <!-- FOOTER CSS -->
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- ================= REGISTER BOX ================= -->
+<div class="register-box">
+    <h2>Register</h2>
+
+    <!-- DUPLICATE EMAIL / GLOBAL ERROR -->
+    <p th:if="${error}"
+       style="color:#ff4d4d; text-align:center; margin-bottom:15px;">
+        [[${error}]]
+    </p>
+
+    <form th:action="@{/register}" method="post" th:object="${user}">
+
+        <!-- FULL NAME -->
+        <input type="text"
+               th:field="*{name}"
+               placeholder="Full Name">
+        <small class="error"
+               th:if="${#fields.hasErrors('name')}"
+               th:errors="*{name}"></small>
+
+        <!-- EMAIL -->
+        <input type="email"
+               th:field="*{email}"
+               placeholder="Email Address">
+        <small class="error"
+               th:if="${#fields.hasErrors('email')}"
+               th:errors="*{email}"></small>
+
+        <!-- PASSWORD -->
+        <input type="password"
+               th:field="*{password}"
+               placeholder="Password">
+        <small class="error"
+               th:if="${#fields.hasErrors('password')}"
+               th:errors="*{password}"></small>
+
+        <!-- PHONE NUMBER -->
+        <input type="text"
+               th:field="*{phone}"
+               placeholder="Phone Number">
+        <small class="error"
+               th:if="${#fields.hasErrors('phone')}"
+               th:errors="*{phone}"></small>
+
+        <!-- SUBMIT -->
+        <button type="submit">Register</button>
+    </form>
+
+    <p class="login-text">
+        Already have an account?
+        <a th:href="@{/login}">Login</a>
+    </p>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

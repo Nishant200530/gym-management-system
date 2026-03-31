@@ -1,0 +1,94 @@
+/* ================= ORDER SUCCESS PAGE ================= */
+
+.order-success-container {
+  max-width: 900px;
+  margin: 120px auto 80px;
+  padding: 0 20px;
+  color: #222;
+}
+
+/* SUCCESS TITLE */
+.order-success-title {
+  text-align: center;
+  color: #2e7d32;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+/* COMMON CARD STYLE */
+.order-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 26px 30px;
+  margin-bottom: 28px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  border-left: 6px solid #ffcc00;
+}
+
+/* CARD HEADINGS */
+.order-card h4 {
+  margin-bottom: 18px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* TEXT INSIDE CARDS */
+.order-card p {
+  margin: 6px 0;
+  font-size: 15.5px;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* DELIVERY ADDRESS */
+.address-card strong {
+  font-size: 16.5px;
+  color: #000;
+}
+
+/* ORDER DETAILS LABELS */
+.order-card span {
+  color: #444;
+}
+
+/* ORDER ITEMS */
+.ordered-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.ordered-item img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+/* PRODUCT TEXT */
+.ordered-item-details p {
+  margin: 2px 0;
+  font-size: 15px;
+  color: #222;
+}
+
+/* CONTINUE BUTTON */
+.continue-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 28px;
+  background: #ffcc00;
+  color: #111;
+  font-weight: 600;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.continue-btn:hover {
+  background: #ffd633;
+}

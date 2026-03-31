@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Membership Plans - MusclePrime Gym</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- NAVBAR CSS -->
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+  <!-- MEMBERSHIP CSS -->
+  <link rel="stylesheet" th:href="@{/css/membership.css}">
+
+  <!-- FOOTER CSS -->
+  <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- ================= MEMBERSHIP SECTION ================= -->
+<section class="membership-section">
+  <h1>Membership Plans</h1>
+
+  <div class="cards-container">
+
+    <div class="card" th:each="m : ${memberships}">
+      <img th:src="@{${m.image}}" alt="Plan Image">
+
+      <div class="card-body">
+        <h5 class="card-title" th:text="${m.planName}"></h5>
+
+        <p class="price">
+          ₹<span th:text="${m.price}"></span>/Year
+        </p>
+
+        <p class="plan-description" th:text="${m.description}"></p>
+
+        <!--  FINAL SELECT PLAN BUTTON -->
+        <a
+          th:href="@{/payment(plan=${m.planName}, price=${m.price})}"
+          class="select-btn">
+          Select Plan
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
