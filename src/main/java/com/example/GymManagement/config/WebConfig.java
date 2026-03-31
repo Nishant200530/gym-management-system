@@ -13,17 +13,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-        // 1 Product images 
-        Path productUploadDir = Paths.get("uploads");
-        String productUploadPath = productUploadDir.toFile().getAbsolutePath();
-
-        //  Trainer images 
-        String trainerUploadPath = "C:/Users/91790/Desktop/uploads/";
+        // Single uploads directory (works in local + Render)
+        Path uploadDir = Paths.get("uploads");
+        String uploadPath = uploadDir.toFile().getAbsolutePath();
 
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations(
-                        "file:" + productUploadPath + "/",   // products
-                        "file:" + trainerUploadPath           // trainers
-                );
+                .addResourceLocations("file:" + uploadPath + "/");
     }
 }
